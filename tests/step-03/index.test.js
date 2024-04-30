@@ -17,3 +17,4 @@ test('Parse SQL Query', () => {
         table: 'sample'
     });
 });
+
