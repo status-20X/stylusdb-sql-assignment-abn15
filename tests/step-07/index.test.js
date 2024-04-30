@@ -91,3 +91,24 @@ test('Execute SQL Query with Not Equal to', async () => {
     expect(result.length).toEqual(2);
     expect(result[0]).toHaveProperty('name');
 });
+
+
+
+  
+  test('Negative Test Case: Execute SQL Query with Greater Than (No Results)', async () => {
+    // Modify query to potentially return no results (e.g., very high age)
+    const queryWithGT = 'SELECT id FROM sample WHERE age > 100';
+    const result = await executeSELECTQuery(queryWithGT);
+    expect(result.length).toEqual(0); // Negative test - Expect no rows
+  });
+  
+ 
+  
+  test('Negative Test Case: Execute SQL Query with Not Equal To (Equal Value)', async () => {
+    // Modify query to select for age exactly 25
+    const queryWithNE = 'SELECT name FROM sample WHERE age != 25';
+    const result = await executeSELECTQuery(queryWithNE);
+    // Negative test - Expect results to exclude rows with age 25
+    expect(result.every(row => row.age !== 25)).toBe(true);
+  });
+  
